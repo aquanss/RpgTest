@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script type="importmap">
+    {
+      "imports": {
+        "react": "https://aistudiocdn.com/react@^19.1.1",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+        "react/": "https://aistudiocdn.com/react@^19.1.1/",
+        "uuid": "https://jspm.dev/uuid"
+      }
+    }
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Idle Realms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Tailwind is used for layout and utilities.
+      // Custom styles override component aesthetics.
+    </script>
+    <script src="https://unpkg.com/realm-web@2.0.0/dist/bundle.iife.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Performance Optimization: Preload critical images -->
+    <link rel="preload" href="https://files.catbox.moe/9n32jw.png" as="image"> <!-- Character Avatar -->
+    <link rel="preload" href="https://files.catbox.moe/edfbxd.png" as="image"> <!-- World Map -->
+    <link rel="preload" href="https://files.catbox.moe/us514l.png" as="image"> <!-- Hunting Background -->
+    <link rel="preload" href="https://files.catbox.moe/ns65yv.jpg" as="image"> <!-- Auth Background -->
+
+    <style>
+      :root {
+        --font-fantasy: 'Cinzel', serif;
+        --font-body: 'Inter', sans-serif;
+      }
+
+      /* Dark Theme (Default) */
+      [data-theme='dark'] {
+        --background-dark: #111827;
+        --background-medium: #1F2937;
+        --border-color: #374151;
+        --text-primary: #F3F4F6;
+        --text-secondary: #9CA3AF;
+        --accent-gold: #F59E0B;
+        --accent-gold-darker: #B45309;
+        --accent-red: #EF4444;
+        --accent-green: #22C55E;
+        --accent-blue: #3B82F6;
+      }
+
+      /* Light Theme */
+      [data-theme='light'] {
+        --background-dark: #F9FAFB;
+        --background-medium: #FFFFFF;
+        --border-color: #D1D5DB;
+        --text-primary: #111827;
+        --text-secondary: #4B5563;
+        --accent-gold: #D97706;
+        --accent-gold-darker: #92400E;
+        --accent-red: #DC2626;
+        --accent-green: #059669;
+        --accent-blue: #2563EB;
+      }
+      
+      /* Colorblind Mode Adjustments (applied over theme) */
+      [data-colorblind-mode='true'][data-theme='dark'] {
+          --accent-red: #F87171; /* Lighter Red */
+          --accent-green: #34D399; /* Teal */
+      }
+      [data-colorblind-mode='true'][data-theme='light'] {
+          --accent-red: #D97706; /* Orange */
+          --accent-green: #06B6D4; /* Cyan */
+      }
+
+
+      body {
+        background-color: var(--background-dark);
+        font-family: var(--font-body);
+        color: var(--text-primary);
+        overflow: hidden; /* Prevent body scroll */
+        -webkit-tap-highlight-color: transparent; /* Improves touch experience */
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      
+      /* Global Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translate3d(0, 20px, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes pulse-strong {
+          0% {
+              transform: scale(0.95);
+              box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+          }
+          70% {
+              transform: scale(1);
+              box-shadow: 0 0 0 12px rgba(245, 158, 11, 0);
+          }
+          100% {
+              transform: scale(0.95);
+              box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+          }
+      }
+
+      [data-animations-disabled='true'] * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .animate-fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+      }
+      .animate-pulse-strong {
+          animation: pulse-strong 2s infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
